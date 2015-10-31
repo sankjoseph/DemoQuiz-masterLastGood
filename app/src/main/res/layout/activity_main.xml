@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/splash_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@drawable/splash"/>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="eKalavya4G"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold|italic"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Med/Engg entrance self-learner"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="italic"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/title"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/login_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_bg"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/bottom_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Powered by www.qppacket .com\nPioneers of Online Entrance Coaching"
+            android:textColor="@android:color/white"
+            android:lineSpacingMultiplier="1.2"
+            android:background="@color/ash_black"
+            android:gravity="center"
+            android:padding="5dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="15dp"
+            >
+            <Button
+                android:id="@+id/practice_exam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attend Practice Exam"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:padding="20dp"
+                android:background="@color/transparent_white"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/ash_black"
+                />
+            <TextView
+                android:id="@+id/practice_exam_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="for week "
+                android:background="@color/ash_black_light"
+                android:layout_alignRight="@id/practice_exam"
+                android:textColor="@android:color/white"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:padding="2dp"
+                android:layout_below="@id/practice_exam"
+                android:layout_marginBottom="15dp"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

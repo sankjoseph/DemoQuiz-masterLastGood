@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_blue_holo">#4ac1cf</color>
+    <color name="dark_blue_holo">#3aa9b5</color>
+    <color name="light_gray">#ededed</color>
+    <color name="header_gray">#e3e3e3</color>
+    <color name="wine_red">#cc5e70</color>
+    <color name="demo_gray">#e0e0e0</color>
+    <color name="dark_gray">#d4d4d4</color>
+    <color name="ash_black">#4a4a4a</color>
+    <color name="ash_black_light">#634a4a4a</color>
+    <color name="transparent_white">#5Fffffff</color>
+</resources>

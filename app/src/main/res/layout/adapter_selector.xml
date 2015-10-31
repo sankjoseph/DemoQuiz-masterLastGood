@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/radio_button_disabled"/>
+
+    <ImageView
+        android:id="@+id/item_correct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_right"
+        android:layout_toLeftOf="@id/radioButton"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/item_wrong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_wrong"
+        android:layout_toLeftOf="@id/radioButton"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/item_correct"
+        android:textColor="@android:color/black"/>
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="96dp"
+        android:layout_height="72dp"
+        android:layout_alignParentLeft="true"/>
+</RelativeLayout>

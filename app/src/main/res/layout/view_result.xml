@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/demo_gray">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/windowTitleSize"
+        android:text="RESULT OF TEST"
+        android:background="@color/ash_black"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <LinearLayout
+        android:id="@+id/retakeTestLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0"
+        android:layout_below="@id/title"
+        android:padding="10dp">
+        <Button
+            android:id="@+id/retake"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:text="Retake Test"
+            android:background="@color/ash_black"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:layout_marginRight="5dp"/>
+
+        <Button
+            android:id="@+id/detailed"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:text="Detailed Answers"
+            android:background="@color/ash_black"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceInverse"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/result_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/retakeTestLayout"
+        android:padding="15dp">
+        <!--Total Q-->
+        <TextView
+            android:id="@+id/total_q_title"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Total Questions"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/total_q_hyphen"
+            android:layout_width="48dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="-"
+            android:layout_toRightOf="@id/total_q_title"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/total_q"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Topic"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/total_q_hyphen"/>
+
+        <!--Total Marks-->
+        <TextView
+            android:id="@+id/total_marks_title"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Total Marks"
+            android:gravity="center_vertical"
+            android:layout_below="@id/total_q_title"/>
+        <TextView
+            android:id="@+id/total_marks_hyphen"
+            android:layout_width="48dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="-"
+            android:layout_toRightOf="@id/total_marks_title"
+            android:layout_below="@id/total_q_title"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/total_marks"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Topic"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/total_marks_hyphen"
+            android:layout_below="@id/total_q_title"/>
+
+        <!--Attempted-->
+        <TextView
+            android:id="@+id/attempted_title"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Attempted"
+            android:gravity="center_vertical"
+            android:layout_below="@id/total_marks_title"/>
+        <TextView
+            android:id="@+id/attempted_hyphen"
+            android:layout_width="48dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="-"
+            android:layout_toRightOf="@id/attempted_title"
+            android:layout_below="@id/total_marks_title"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/attempted"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Topic"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/attempted_hyphen"
+            android:layout_below="@id/total_marks_title"/>
+
+        <!--Correct Answers-->
+        <TextView
+            android:id="@+id/correct_answers_title"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Correct Answers"
+            android:gravity="center_vertical"
+            android:layout_below="@id/attempted_title"/>
+        <TextView
+            android:id="@+id/correct_answers_hyphen"
+            android:layout_width="48dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="-"
+            android:layout_toRightOf="@id/correct_answers_title"
+            android:layout_below="@id/attempted_title"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/correct_answers"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Topic"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/correct_answers_hyphen"
+            android:layout_below="@id/attempted_title"/>
+
+        <!--Wrong Answers-->
+        <TextView
+            android:id="@+id/wrong_answers_title"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Wrong Answers"
+            android:gravity="center_vertical"
+            android:layout_below="@id/correct_answers_title"/>
+        <TextView
+            android:id="@+id/wrong_answers_hyphen"
+            android:layout_width="48dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="-"
+            android:layout_toRightOf="@id/wrong_answers_title"
+            android:layout_below="@id/correct_answers_title"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/wrong_answers"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Topic"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/wrong_answers_hyphen"
+            android:layout_below="@id/correct_answers_title"/>
+
+        <!--Unattended-->
+        <TextView
+            android:id="@+id/unattended_title"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Unattended"
+            android:gravity="center_vertical"
+            android:layout_below="@id/wrong_answers_title"/>
+        <TextView
+            android:id="@+id/unattended_hyphen"
+            android:layout_width="48dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="-"
+            android:layout_toRightOf="@id/unattended_title"
+            android:layout_below="@id/wrong_answers_title"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/unattended"
+            android:layout_width="128dp"
+            android:layout_height="@dimen/text_height_result_page"
+            android:textColor="@android:color/black"
+            android:text="Topic"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/unattended_hyphen"
+            android:layout_below="@id/wrong_answers_title"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/separator1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/result_content"
+        android:background="@android:color/holo_orange_dark"/>
+
+    <WebView
+        android:id="@+id/graph_webview"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:layout_below="@id/separator1"
+        android:background="@android:color/white"></WebView>
+
+    <View
+        android:id="@+id/separator2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/graph_webview"
+        android:background="@android:color/holo_orange_dark"/>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:text="Correct answer scores 1 mark and wrong answer deduct 0.25 marks"
+        android:gravity="center_vertical"
+        android:layout_below="@id/separator2"
+        android:padding="15dp"/>
+
+</RelativeLayout>
