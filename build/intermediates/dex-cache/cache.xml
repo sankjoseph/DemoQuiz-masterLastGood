@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
+        <dex dex="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/pre-dexed/debug/classes-d5c1c41c5aa04349fad929982f43c4588d146316.jar" />
+    </item>
+    <item
+        jar="/Users/gorillalogic/GorillaLogic/Android/android_sdk_standalone/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-eb7b241bd470e3fbbf28945df6fce0aeb9a4a004.jar" />
+    </item>
+    <item
+        jar="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c6d79137693d494dee16372d3921f919eb724ced">
+        <dex dex="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/pre-dexed/debug/classes-c39d03bc06d9f95a73f9b4b69a5c3f1795f56c01.jar" />
+    </item>
+    <item
+        jar="/Users/gorillalogic/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-9623bdc1a32fab297598d4aca46275cb866bf811.jar" />
+    </item>
+    <item
+        jar="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/pre-dexed/debug/classes-a0ff41df6a393a6c2bc57e8df5619d6f7b6e6b80.jar" />
+    </item>
+    <item
+        jar="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-8ed877f5c8317dc973200cc8f890cb932722ef4b.jar" />
+    </item>
+    <item
+        jar="/Users/gorillalogic/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/pre-dexed/debug/gson-2.2.4-e96a174e0de2dc641075778ee1149d31c3db4456.jar" />
+    </item>
+    <item
+        jar="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/Users/gorillalogic/Desktop/anil_p/SJ/EKalavya4G/DemoQuiz-masterLastGood/app/build/intermediates/pre-dexed/debug/classes-c3499a929e7fc6c899028e6a58a01548df03bb49.jar" />
+    </item>
+
+</items>

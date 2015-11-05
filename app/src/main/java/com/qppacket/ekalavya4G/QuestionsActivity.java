@@ -88,7 +88,7 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
         RestApi api = new RestApi(this);
         api.setMessage("Getting Questions...");
         api.setPostExecuteListener(this);
-        api.get(Utils.URL_VIEW_QUESTION);
+        api.get(Utils.URL_LATEST_QUESTION_PAPER);
     }
 
     private void setCurrentQuestion(Question q) {

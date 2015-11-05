@@ -31,11 +31,11 @@ import java.util.List;
 public class RestApi {
     public static final String TAG_XML_VERSION = "xmlversion";
     private static final String DOWNLOAD_PENDING_URLS = "download_pending_urls";
-    public static final String OFFLINE_QUESTIONS = "offline_questions";
+    public static final String OFFLINE_QUESTIONS = "offline_questions_";
 
     private Activity mActivity;
     private ProgressDialog mProgressDialog;
-    private OnPostExecuteListener mExecuteListener;
+    protected OnPostExecuteListener mExecuteListener;
 
     private String mProgressDialogMessage="";
     private String mUrl;
@@ -88,7 +88,7 @@ public class RestApi {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 if (mDownloadIssued != mDownloadSuccess)
-                    mProgressDialog.setMessage("Downloading latest question paper...");
+                    mProgressDialog.setMessage("Downloading question paper...");
                 if (mExecuteListener != null) {
                     if (mIsParseSuccessfull == true)
                         if (isDownloadComplete())
@@ -179,13 +179,12 @@ public class RestApi {
             mIsParseSuccessfull = true;
             Data.getInstance().setQuestions(getOfflineQuestions());
         }
-
     }
 
     private List<Question> getOfflineQuestions() {
         List<Question> questions = new ArrayList<>();
         try {
-            JSONArray qs = new JSONArray(mStore.getStore().getString(OFFLINE_QUESTIONS, new JSONArray().toString()));
+            JSONArray qs = new JSONArray(mStore.getStore().getString(OFFLINE_QUESTIONS + mUrl, new JSONArray().toString()));
             for (int i=0; i<qs.length(); i++) {
                 questions.add(Question.parseJson(qs.getJSONObject(i)));
             }
@@ -204,7 +203,7 @@ public class RestApi {
                 e.printStackTrace();
             }
         }
-        mStore.getStoreEditor().putString(OFFLINE_QUESTIONS, qs.toString()).commit();
+        mStore.getStoreEditor().putString(OFFLINE_QUESTIONS + mUrl, qs.toString()).commit();
     }
 
     private boolean parseControlData(String text, String name) {
@@ -338,7 +337,6 @@ public class RestApi {
                 downloaded = false;
             } finally {
                 try {
-
                     if(content != null) {
                         content.close();
                     }
@@ -349,7 +347,6 @@ public class RestApi {
                         fos.flush();
                         fos.close();
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

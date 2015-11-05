@@ -8,6 +8,7 @@ import java.util.List;
 public class Data {
     private static Data mInstance;
 
+    private List<QuestionPaper> mPapers;
     private List<Question> mQuestions;
     private Question mQuestion;
     private String mUsername;
@@ -42,5 +43,13 @@ public class Data {
 
     public void setUsername(String username) {
         mUsername = username;
+    }
+
+    public void setQuestionPaperList(List<QuestionPaper> list) {
+        mPapers = list;
+    }
+
+    public List<QuestionPaper> getQuestionPapersList() {
+        return mPapers;
     }
 }
