@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.qppacket.ekalavya4G.R;
 import com.squareup.picasso.Picasso;
 
@@ -65,7 +67,7 @@ public class SelectionAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.item = (TextView) view.findViewById(R.id.item);
             holder.radioButton = (ImageView) view.findViewById(R.id.radioButton);
-            holder.item_image = (ImageView) view.findViewById(R.id.item_image);
+            holder.item_image = (SubsamplingScaleImageView) view.findViewById(R.id.item_image);
             holder.item_correct = (ImageView) view.findViewById(R.id.item_correct);
             holder.item_wrong = (ImageView) view.findViewById(R.id.item_wrong);
             view.setTag(holder);
@@ -76,7 +78,8 @@ public class SelectionAdapter extends BaseAdapter {
         String option = mItems.get(i);
         if (option.contains(IMG_DOWNLOAD_DIR.getAbsolutePath())) {
             Uri uri = Uri.fromFile(new File(option));
-            Picasso.with(mContext).load(uri).into(holder.item_image);
+            holder.item_image.setImage(ImageSource.uri(uri));
+//            Picasso.with(mContext).load(uri).into(holder.item_image);
             holder.item.setVisibility(View.GONE);
             holder.item_image.setVisibility(View.VISIBLE);
         } else {
@@ -93,6 +96,7 @@ public class SelectionAdapter extends BaseAdapter {
 
     private class ViewHolder {
         TextView item;
-        ImageView radioButton, item_image, item_correct, item_wrong;
+        ImageView radioButton, item_correct, item_wrong;
+        SubsamplingScaleImageView item_image;
     }
 }

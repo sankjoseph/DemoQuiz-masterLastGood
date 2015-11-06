@@ -18,6 +18,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.qppacket.ekalavya4G.adapters.SelectionAdapter;
 import com.qppacket.ekalavya4G.custom.MyListView;
 import com.qppacket.ekalavya4G.model.Data;
@@ -93,12 +95,12 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
     private void setCurrentQuestion(Question q) {
         Data.getInstance().setCurrentQuestion(q);
         TextView question_text = (TextView) findViewById(R.id.question);
-        ImageView question_image = (ImageView) findViewById(R.id.question_image);
+        SubsamplingScaleImageView question_image = (SubsamplingScaleImageView) findViewById(R.id.question_image);
         if (q.question.contains(IMG_DOWNLOAD_DIR.getAbsolutePath())) {
             question_image.setVisibility(View.VISIBLE);
             question_text.setVisibility(View.GONE);
             Uri uri = Uri.fromFile(new File(q.question));
-            Picasso.with(QuestionsActivity.this).load(uri).into(question_image);
+            question_image.setImage(ImageSource.uri(uri));
         } else {
             question_image.setVisibility(View.GONE);
             question_text.setVisibility(View.VISIBLE);
@@ -242,7 +244,7 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
 
             case R.id.detailed:
                 Intent i = new Intent(this, WebviewXmlActivity.class);
-                i.putExtra("url", Utils.URL_DETAILED_ANSWERS);
+                i.putExtra("url", Utils.URL_DETAILED_ANSWERS + getIntent().getStringExtra("url"));
                 startActivity(i);
                 break;
         }

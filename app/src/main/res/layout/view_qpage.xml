@@ -188,7 +188,7 @@
                                 android:text=""
                                 android:textColor="@android:color/black"
                                 android:textAppearance="?android:attr/textAppearanceMedium"/>
-                            <ImageView
+                            <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
                                 android:id="@+id/question_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="72dp"/>
