@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
         mLogin = findViewById(R.id.login_screen);
         mSplash = findViewById(R.id.splash_screen);
         mOldQuestions = findViewById(R.id.old_questions);
-        findViewById(R.id.practice_exam).setOnClickListener(this);
+        findViewById(R.id.latest_exam).setOnClickListener(this);
 
         isSplash = true;
         Handler h = new Handler();
@@ -81,7 +81,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
         }
 
         switch (v.getId()) {
-            case R.id.practice_exam:
+            case R.id.latest_exam:
                 showQuestionsScreen(Utils.URL_LATEST_QUESTION_PAPER);
                 break;
 

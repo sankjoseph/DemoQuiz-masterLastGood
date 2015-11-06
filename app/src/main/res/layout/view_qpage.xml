@@ -209,10 +209,10 @@
                             android:headerDividersEnabled="false"
                             android:footerDividersEnabled="false"
                             android:padding="10dp"
-                            android:background="@color/demo_gray"
                             android:isScrollContainer="false"
                             android:focusable="false"
-                            android:focusableInTouchMode="false">
+                            android:focusableInTouchMode="false"
+                            android:background="@android:color/white">
                         </com.qppacket.ekalavya4G.custom.MyListView>
                     </RelativeLayout>
                 </RelativeLayout>
