@@ -14,7 +14,6 @@ public class WebviewXmlActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_xml);
-        Log.i(".EKalavya", "url = " + getIntent().getStringExtra("url"));
         ((WebView)findViewById(R.id.web_view)).loadUrl(getIntent().getStringExtra("url"));
     }
 }
