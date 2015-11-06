@@ -7,16 +7,21 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qppacket.ekalavya4G.model.Data;
+import com.qppacket.ekalavya4G.model.Question;
 import com.qppacket.ekalavya4G.model.QuestionPaper;
 import com.qppacket.ekalavya4G.model.Store;
 import com.qppacket.ekalavya4G.rest.OnPostExecuteListener;
 import com.qppacket.ekalavya4G.rest.QuestionPaperListApi;
 import com.qppacket.ekalavya4G.rest.RestApi;
 import com.qppacket.ekalavya4G.utils.Utils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,12 +75,14 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
 
     @Override
     public void onClick(View v) {
+        if (!isAvailableOffline(Utils.URL_LATEST_QUESTION_PAPER)) {
+            Toast.makeText(this, "No Internet. App needs to connect to server to download questions for the first time.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         switch (v.getId()) {
             case R.id.practice_exam:
-                if (isAvailableOffline(Utils.URL_LATEST_QUESTION_PAPER))
-                    showQuestionsScreen();
-                else
-                    Toast.makeText(this, "No Internet. App needs to connect to server to download questions for the first time.", Toast.LENGTH_LONG).show();
+                showQuestionsScreen(Utils.URL_LATEST_QUESTION_PAPER);
                 break;
 
             case R.id.old_questions:
@@ -92,18 +99,16 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
                 names.add(p.getName());
             }
 
-            if (names != null) {
-                String[] array = new String[names.size()];
-                new AlertDialog.Builder(this)
-                        .setTitle("Select Question Paper")
-                        .setItems(array, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                getQuestionsFromServer(papers.get(i).getPath());
-                            }
-                        })
-                        .show();
-            }
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Select Question Paper")
+                    .setAdapter(new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, names)
+                            , new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            getQuestionsFromServer(papers.get(i).getQPath());
+                        }
+                    })
+                    .show();
         }
     }
 
@@ -120,28 +125,30 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
         QuestionPaperListApi api = new QuestionPaperListApi(this);
         api.setPostExecuteListener(new OnPostExecuteListener() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(String url) {
                 mOldQuestions.setEnabled(true);
                 mOldQuestions.setOnClickListener(MainActivity.this);
             }
 
             @Override
-            public void onFailure() {
+            public void onFailure(String url) {
                 mOldQuestions.setEnabled(false);
             }
         });
         api.get(Utils.URL_QUESTION_PAPER_LIST);
     }
 
-    private void showQuestionsScreen() {
+    private void showQuestionsScreen(String url) {
+        Data.getInstance().setQuestions(getOfflineQuestions(url));
         Intent i = new Intent(this, QuestionsActivity.class);
-        i.putExtra("is_downloaded", isAvailableOffline(Utils.URL_LATEST_QUESTION_PAPER));
+        i.putExtra("is_downloaded", isAvailableOffline(url));
+        i.putExtra("url", url);
         startActivity(i);
     }
 
     private void showWebXmlView(int id) {
         Intent i = new Intent(this, WebviewXmlActivity.class);
-       // i.putExtra("url", id == R.id.why_ekalvya ? Utils.URL_WHY_EKALAVYA : Utils.URL_ENTRANCE_NEWS);
+        // i.putExtra("url", id == R.id.why_ekalvya ? Utils.URL_WHY_EKALAVYA : Utils.URL_ENTRANCE_NEWS);
         startActivity(i);
     }
 
@@ -149,14 +156,31 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
         return mStore.getStore().contains(RestApi.OFFLINE_QUESTIONS + url);
     }
 
-    @Override
-    public void onSuccess() {
-        ((TextView)findViewById(R.id.practice_exam_version))
-                .setText("for week " + mStore.getStore().getString(RestApi.TAG_XML_VERSION, "<no data>"));
+    private List<Question> getOfflineQuestions(String url) {
+        List<Question> questions = new ArrayList<>();
+        try {
+            JSONArray qs = new JSONArray(mStore.getStore().getString(RestApi.OFFLINE_QUESTIONS + url, new JSONArray().toString()));
+            for (int i=0; i<qs.length(); i++) {
+                questions.add(Question.parseJson(qs.getJSONObject(i)));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return questions;
     }
 
     @Override
-    public void onFailure() {
+    public void onSuccess(String url) {
+        if (url.equals(Utils.URL_LATEST_QUESTION_PAPER)) {
+            ((TextView) findViewById(R.id.practice_exam_version))
+                    .setText(mStore.getStore().getString(RestApi.TAG_XML_VERSION, "<no data>"));
+        } else {
+            showQuestionsScreen(url);
+        }
+    }
+
+    @Override
+    public void onFailure(String url) {
         Toast.makeText(this, "Failure: Getting questions from server.", Toast.LENGTH_SHORT).show();
     }
 }

@@ -92,11 +92,11 @@ public class RestApi {
                 if (mExecuteListener != null) {
                     if (mIsParseSuccessfull == true)
                         if (isDownloadComplete())
-                            mExecuteListener.onSuccess();
+                            mExecuteListener.onSuccess(mUrl);
                         else
                             mPostAfterDownloadComplete = true;
                     else
-                        mExecuteListener.onFailure();
+                        mExecuteListener.onFailure(mUrl);
                 }
                 dismissProgress();
             }
@@ -309,7 +309,7 @@ public class RestApi {
 
         private void postAfterDownloadComplete() {
             if (mPostAfterDownloadComplete && isDownloadComplete())
-                mExecuteListener.onSuccess();
+                mExecuteListener.onSuccess(mUrl);
         }
 
         private boolean downloadFile(String url) {

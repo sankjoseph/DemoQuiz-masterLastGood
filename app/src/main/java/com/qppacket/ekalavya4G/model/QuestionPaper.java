@@ -5,21 +5,17 @@ package com.qppacket.ekalavya4G.model;
  */
 public class QuestionPaper {
 
-    private String name, path;
+    public String name, qPath, qaPath;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getQPath() {
+        return qPath;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
+    public String getQAPath() {
+        return qaPath;
     }
 }

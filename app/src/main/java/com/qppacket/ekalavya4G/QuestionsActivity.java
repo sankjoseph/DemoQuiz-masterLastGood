@@ -66,7 +66,6 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
         check_button.setOnClickListener(this);
         findViewById(R.id.finish).setOnClickListener(this);
         findViewById(R.id.next).setOnClickListener(this);
-//        initializeNavigationDrawer();
         updateTimerText("--:--:--");
         if (getIntent() != null
                 && getIntent().getBooleanExtra("is_downloaded", false)) {
@@ -88,7 +87,7 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
         RestApi api = new RestApi(this);
         api.setMessage("Getting Questions...");
         api.setPostExecuteListener(this);
-        api.get(Utils.URL_LATEST_QUESTION_PAPER);
+        api.get(getIntent().getStringExtra("url"));
     }
 
     private void setCurrentQuestion(Question q) {
@@ -265,6 +264,7 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
 
     private void showQuestionsScreen() {
         Intent i = new Intent(this, QuestionsActivity.class);
+        i.putExtra("url", getIntent().getStringExtra("url"));
         startActivity(i);
     }
 
@@ -290,7 +290,7 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(String url) {
         startTest();
     }
 
@@ -304,7 +304,7 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(String url) {
         Toast.makeText(this, "Failure: Getting questions from server.", Toast.LENGTH_SHORT).show();
     }
 

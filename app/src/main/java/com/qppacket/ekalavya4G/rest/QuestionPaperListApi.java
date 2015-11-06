@@ -40,9 +40,9 @@ public class QuestionPaperListApi extends RestApi {
                 super.onPostExecute(result);
                 if (mExecuteListener != null) {
                     if (result)
-                        mExecuteListener.onSuccess();
+                        mExecuteListener.onSuccess(mUrl);
                     else
-                        mExecuteListener.onFailure();
+                        mExecuteListener.onFailure(mUrl);
                 }
             }
         }.execute();
@@ -59,7 +59,7 @@ public class QuestionPaperListApi extends RestApi {
                 parser.setInput(in, "UTF-8");
                 int eventType = parser.getEventType();
                 String name = null;
-                boolean isName = false, isPath = false;
+                boolean isName = false, isPath = false, isQAPath = false;
                 QuestionPaper p = null;
                 while (eventType != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_TAG) {
@@ -67,17 +67,22 @@ public class QuestionPaperListApi extends RestApi {
                         if (name.equalsIgnoreCase("questionName")) {
                             isName = true;
                             p = new QuestionPaper();
-                        } else if (name.equalsIgnoreCase("questionAnsPath")) {
+                        } else if (name.equalsIgnoreCase("questionPath")) {
                             isPath = true;
+                        } else if (name.equalsIgnoreCase("questionAnsPath")) {
+                            isQAPath = true;
                         }
                     } else if (eventType == XmlPullParser.TEXT) {
                         if (p != null) {
                             if (isName) {
                                 isName = false;
-                                p.setName(parser.getText().trim());
+                                p.name = parser.getText().trim();
                             } else if (isPath) {
                                 isPath = false;
-                                p.setPath(parser.getText().trim());
+                                p.qPath = parser.getText().trim();
+                            } else if (isQAPath) {
+                                isQAPath = false;
+                                p.qaPath = parser.getText().trim();
                                 papers.add(p);
                             }
                         }
