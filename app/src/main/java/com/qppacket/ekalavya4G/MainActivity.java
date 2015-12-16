@@ -2,10 +2,13 @@ package com.qppacket.ekalavya4G;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -18,6 +21,7 @@ import com.qppacket.ekalavya4G.model.Store;
 import com.qppacket.ekalavya4G.rest.OnPostExecuteListener;
 import com.qppacket.ekalavya4G.rest.QuestionPaperListApi;
 import com.qppacket.ekalavya4G.rest.RestApi;
+import com.qppacket.ekalavya4G.utils.OnInternetConnectedListener;
 import com.qppacket.ekalavya4G.utils.Utils;
 
 import org.json.JSONArray;
@@ -33,6 +37,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
     private boolean isSplash;
     private View mOldQuestions;
     private Store mStore;
+    private OnInternetConnectedListener mOnInternetConnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
         mLogin = findViewById(R.id.login_screen);
         mSplash = findViewById(R.id.splash_screen);
         mOldQuestions = findViewById(R.id.old_questions);
+        mOldQuestions.setOnClickListener(this);
         findViewById(R.id.latest_exam).setOnClickListener(this);
 
         isSplash = true;
@@ -54,29 +60,46 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
                         // Show signup - Login screen
                         mSplash.setVisibility(View.GONE);
                         mLogin.setVisibility(View.VISIBLE);
-                        getQuestionsFromServer(Utils.URL_LATEST_QUESTION_PAPER);
                         getOldQuestionPapers();
+                        getQuestionsFromServer(Utils.URL_LATEST_QUESTION_PAPER);
                     }
                 });
             }
         }, 1000);
         mStore = new Store(this);
+        mOnInternetConnected = new OnInternetConnectedListener() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                refresh();
+            }
+        };
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        refresh();
+        isSplash = false;
+        registerReceiver(mOnInternetConnected, new IntentFilter(getPackageName() + ".MainActivity"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mOnInternetConnected);
+    }
+
+    private void refresh() {
         if (!isAvailableOffline(Utils.URL_LATEST_QUESTION_PAPER) && !isSplash) {
             getQuestionsFromServer(Utils.URL_LATEST_QUESTION_PAPER);
             getOldQuestionPapers();
         }
-        isSplash = false;
     }
 
     @Override
     public void onClick(View v) {
         if (!isAvailableOffline(Utils.URL_LATEST_QUESTION_PAPER)) {
-            Toast.makeText(this, "No Internet. App needs to connect to server to download questions for the first time.", Toast.LENGTH_LONG).show();
+            Utils.showNoInternetMessage(this);
             return;
         }
 
@@ -109,6 +132,8 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
                         }
                     })
                     .show();
+        } else {
+            Utils.showNoInternetMessage(this);
         }
     }
 
@@ -127,12 +152,10 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
             @Override
             public void onSuccess(String url) {
                 mOldQuestions.setEnabled(true);
-                mOldQuestions.setOnClickListener(MainActivity.this);
             }
 
             @Override
             public void onFailure(String url) {
-                mOldQuestions.setEnabled(false);
             }
         });
         api.get(Utils.URL_QUESTION_PAPER_LIST);
@@ -153,7 +176,8 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
     }
 
     private boolean isAvailableOffline(String url) {
-        return mStore.getStore().contains(RestApi.OFFLINE_QUESTIONS + url);
+        return mStore.getStore().contains(RestApi.OFFLINE_QUESTIONS + url)
+                && Data.getInstance().getQuestionPapersList() != null;
     }
 
     private List<Question> getOfflineQuestions(String url) {
@@ -173,7 +197,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnPo
     public void onSuccess(String url) {
         if (url.equals(Utils.URL_LATEST_QUESTION_PAPER)) {
             ((TextView) findViewById(R.id.practice_exam_version))
-                    .setText(mStore.getStore().getString(RestApi.TAG_XML_VERSION, "<no data>"));
+                    .setText(mStore.getStore().getString(RestApi.TAG_XML_VERSION_LATEST_PAPER, "<no data>"));
         } else {
             showQuestionsScreen(url);
         }

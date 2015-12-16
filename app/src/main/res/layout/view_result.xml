@@ -22,11 +22,11 @@
         android:layout_below="@id/title"
         android:padding="10dp">
         <Button
-            android:id="@+id/retake"
+            android:id="@+id/home"
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="match_parent"
-            android:text="Retake Test"
+            android:text="Go Home"
             android:background="@color/ash_black"
             android:padding="10dp"
             android:textColor="@android:color/white"

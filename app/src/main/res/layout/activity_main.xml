@@ -70,7 +70,7 @@
                 android:id="@+id/practice_exam_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="latest"
+                android:text="Latest"
                 android:background="@color/ash_black_light"
                 android:layout_centerInParent="true"
                 android:textColor="@android:color/white"

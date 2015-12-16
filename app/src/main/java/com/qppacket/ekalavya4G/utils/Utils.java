@@ -1,5 +1,8 @@
 package com.qppacket.ekalavya4G.utils;
 
+import android.content.Context;
+import android.widget.Toast;
+
 /**
  * Created by gorillalogic on 6/12/15.
  */
@@ -10,6 +13,7 @@ public class Utils {
     public static final String URL_WHY_EKALAVYA = "http://qppacket.com/mobile/Whyekalavya.xml";
     public static final String URL_ENTRANCE_NEWS = "http://qppacket.com/mobile/Entrancenews.xml";
     public static final String URL_DETAILED_ANSWERS = "http://www.qppacket.com/mobile/showAnswers.aspx?questionAnsPath=";
+    public static final String URL_DETAILED_ANSWERS_LATEST_PAPER = "http://www.qppacket.com/mobile/showAnswers.aspx?";
     public static final String URL_QUESTION_PAPER_LIST = "http://www.qppacket.com/Mobile/QuestionMapping.xml";
 
     public static final String PREFIX_IMAGE = "http://qppacket.com/QPIMages/";
@@ -21,5 +25,9 @@ public class Utils {
     public static String parseUrlForFilename(String url) {
         String[] splitted = url.split("/");
         return splitted[splitted.length-1];
+    }
+
+    public static void showNoInternetMessage(Context c) {
+        Toast.makeText(c, "No Internet. App needs to connect to server to download questions for the first time.", Toast.LENGTH_LONG).show();
     }
 }

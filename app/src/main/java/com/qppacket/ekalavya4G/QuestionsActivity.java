@@ -167,7 +167,7 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
         findViewById(R.id.control_bar).setVisibility(View.GONE);
         findViewById(R.id.separator3).setVisibility(View.GONE);
         findViewById(R.id.result_page).setVisibility(View.VISIBLE);
-        findViewById(R.id.retake).setOnClickListener(this);
+        findViewById(R.id.home).setOnClickListener(this);
         findViewById(R.id.detailed).setOnClickListener(this);
 
         ((TextView)findViewById(R.id.total_q)).setText("" + mQuestions.size());
@@ -211,7 +211,7 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.next:
-                mQuestionsLayout.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
+                mQuestionsLayout.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_rtol));
                 if (++mQNo < mQuestions.size()) {
                     setCurrentQuestion(mQuestions.get(mQNo));
                     showChoice(mQuestions.get(mQNo));
@@ -237,14 +237,14 @@ public class QuestionsActivity extends Activity implements View.OnClickListener,
                 enableCheckButton(!current.isVerified() && current.isAnswered());
                 break;
 
-            case R.id.retake:
+            case R.id.home:
                 finish();
-                showQuestionsScreen();
                 break;
 
             case R.id.detailed:
                 Intent i = new Intent(this, WebviewXmlActivity.class);
-                i.putExtra("url", Utils.URL_DETAILED_ANSWERS + getIntent().getStringExtra("url"));
+                String url = getIntent().getStringExtra("url");
+                i.putExtra("url", (url.equals(Utils.URL_LATEST_QUESTION_PAPER) ? Utils.URL_DETAILED_ANSWERS_LATEST_PAPER : Utils.URL_DETAILED_ANSWERS) + url);
                 startActivity(i);
                 break;
         }

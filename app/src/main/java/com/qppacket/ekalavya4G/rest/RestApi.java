@@ -30,6 +30,7 @@ import java.util.List;
  */
 public class RestApi {
     public static final String TAG_XML_VERSION = "xmlversion";
+    public static final String TAG_XML_VERSION_LATEST_PAPER = "xmlversion_latest_paper";
     private static final String DOWNLOAD_PENDING_URLS = "download_pending_urls";
     public static final String OFFLINE_QUESTIONS = "offline_questions_";
 
@@ -207,13 +208,19 @@ public class RestApi {
     }
 
     private boolean parseControlData(String text, String name) {
-        Log.i(".DemoQuiz", "parseControlData() text = " + text + "\nName = " + name);
+        Log.i(".EKalavya4G", "parseControlData() text = " + text + "\nName = " + name);
         text = text.trim();
         if (name.equalsIgnoreCase(TAG_XML_VERSION)
                 && mStore.getStore().getString(name, "").equalsIgnoreCase(text)) {
             return false;
         }
         mStore.getStoreEditor().putString(name, text).commit();
+
+        // Latest Question paper title save
+        if (name.equalsIgnoreCase(TAG_XML_VERSION)
+                && mUrl != null && mUrl.equals(Utils.URL_LATEST_QUESTION_PAPER)) {
+            mStore.getStoreEditor().putString(TAG_XML_VERSION_LATEST_PAPER, text).commit();
+        }
         return true;
     }
 
@@ -225,7 +232,7 @@ public class RestApi {
     }
 
     private Question parseQuestion(String q, String subject) {
-        Log.i(".DemoQuiz", "text = " + q + "\nSubject = " + subject);
+        Log.i(".EKalavya4G", "text = " + q + "\nSubject = " + subject);
         Question question = new Question();
         String[] split = q.split("\r");
         String[] temp;
@@ -279,7 +286,7 @@ public class RestApi {
 
         @Override
         protected Boolean doInBackground(Void... args) {
-            Log.i(".DemoQuiz", "Downloading..." + mDownloadUrl);
+            Log.i(".EKalavya4G", "Downloading..." + mDownloadUrl);
             return downloadFile(mDownloadUrl);
         }
 
@@ -287,7 +294,7 @@ public class RestApi {
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
             String key = Utils.parseUrlForFilename(mDownloadUrl);
-            Log.i(".DemoQuiz", key + " Success: " + result.booleanValue());
+            Log.i(".EKalavya4G", key + " Success: " + result.booleanValue());
             try {
                 mDownloadPendingUrls = new JSONObject(mStore.getStore().getString(DOWNLOAD_PENDING_URLS, mDownloadPendingUrls.toString()));
                 if (!result.booleanValue()) {
